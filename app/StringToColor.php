@@ -18,6 +18,7 @@ class StringToColor
 
     public function handle(string $name)
     {
+        $name = json_encode($name);
         $mixed = [];
         $colors = $this->getColors($name);
 
@@ -37,7 +38,7 @@ class StringToColor
                     $d = $ord;
                 }
 
-                $f = static::SEED / $d;
+                $f = (int) (static::SEED / $d);
                 $b = ($b + $ord * $f * static::FACTOR) % static::SEED;
             }
         }
@@ -48,19 +49,19 @@ class StringToColor
         if ($mixed) {
             $rgb = $this->hexToRGB($hex);
 
-            return $this->rgbToHex([
-                static::TEXT_WEIGHT * $rgb[0] + static::MIXED_WEIGHT * $mixed[0],
-                static::TEXT_WEIGHT * $rgb[1] + static::MIXED_WEIGHT * $mixed[1],
-                static::TEXT_WEIGHT * $rgb[2] + static::MIXED_WEIGHT * $mixed[2],
-            ]);
+            return '#' . $this->rgbToHex([
+                    static::TEXT_WEIGHT * $rgb[0] + static::MIXED_WEIGHT * $mixed[0],
+                    static::TEXT_WEIGHT * $rgb[1] + static::MIXED_WEIGHT * $mixed[1],
+                    static::TEXT_WEIGHT * $rgb[2] + static::MIXED_WEIGHT * $mixed[2],
+                ]);
         }
 
-        return $hex;
+        return '#' . $hex;
     }
 
     protected function getOrd(string $char)
     {
-        [, $ord] = unpack('N', mb_convert_encoding($$char, 'UCS-4BE', 'UTF-8'));
+        [, $ord] = unpack('N', mb_convert_encoding($char, 'UCS-4BE', 'UTF-8'));
 
         return $ord;
     }

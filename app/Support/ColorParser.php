@@ -9,7 +9,7 @@ class ColorParser
     public function __construct()
     {
         $this->colors = json_decode(
-            file_get_contents(__DIR__ . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'colors.json'),
+            file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'colors.json'),
             true,
             512,
             JSON_THROW_ON_ERROR
