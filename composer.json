@@ -1,0 +1,21 @@
+{
+  "name": "kyosifov/php-string-to-color",
+  "description": "Port of js string to color",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "kyosifov",
+      "email": "kyosifov@2create.studio"
+    }
+  ],
+  "require": {
+    "ext-json": "*",
+    "ext-mbstring": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "StringToColor\\": "app/"
+    }
+  }
+}
